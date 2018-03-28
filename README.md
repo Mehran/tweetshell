@@ -11,6 +11,7 @@ Tweetshell is an Shell Script to perform multi-threaded brute force attack again
 - Save/Resume sessions
 - Anonymous attack through TOR
 - Default password list (best +39k 8 letters)
+- Check valid username
 - Check and Install all dependencies
 
 ### Usage:
