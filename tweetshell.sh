@@ -37,8 +37,9 @@ function start() {
 banner
 checkroot
 dependencies
-read -p $'\e[1;92mUsername account or email: \e[0m' username
-checkaccount=$(curl -s https://www.twitter.com/$username/ | grep -c "Sorry, that page doesn’t exist!")
+read -p $'\e[1;92mUsername account: \e[0m' username
+
+checkaccount=$(curl -L -s https://www.twitter.com/$username/ | grep -c "Sorry, that page doesn’t exist!")
 if [[ "$checkaccount" == 1 ]]; then
 printf "\e[1;91mInvalid Username! Try again\e[0m\n"
 sleep 1
