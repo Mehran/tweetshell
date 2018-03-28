@@ -6,6 +6,8 @@ Multi-thread Twitter BruteForcer in Shell Script
 
 Tweetshell is an Shell Script to perform multi-threaded brute force attack against Twitter, this script can bypass login limiting and it can test infinite number of passwords with a rate of +400 passwords/min using 20 threads.
 
+![tweet](https://user-images.githubusercontent.com/34893261/38052298-2abf6b28-32a7-11e8-83e6-de7c015b774e.png)
+
 ### Features
 - Multi-thread (400 pass/min, 20 threads)
 - Save/Resume sessions
