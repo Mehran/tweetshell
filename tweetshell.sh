@@ -37,7 +37,7 @@ function start() {
 banner
 checkroot
 dependencies
-read -p $'\e[1;92mUsername account: \e[0m' username
+read -p $'\e[1;92mUsername account: \e[0m' _barrbii
 
 checkaccount=$(curl -L -s https://www.twitter.com/$username/ | grep -c "Sorry, that page doesn’t exist!")
 if [[ "$checkaccount" == 1 ]]; then
